@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dojo Weather App</title>
+
+    <script type="text/javascript" src='http://code.jquery.com/jquery-1.10.2.min.js'></script>
+    
+<script>
+
+    $(document).ready(function(){
+        $('form').submit(function(){
+            var city = $('input[name="userCity"]').val().toUpperCase();
+            var getURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=552b04493b48c2e23d314638b64e6337";
+            var temp = 0;
+            $.get(getURL, function(res){
+                temp = res.main.temp;
+                $("#theWeather").html(
+                "<h1>" + city + "</h1><h3>" + temp + "</h3>");
+
+            }, 'json');
+
+            return false;
+        })
+
+
+
+    })
+    </script>
+
+    <style>
+        </style>
+
+</head>
+<body>
+    <form>
+        <input type="textfield" placeholder="Type the name of a city" name="userCity">
+        <input type="submit" value="Submit">
+    </form>
+    <div id="theWeather">
+    </div>
+    
+</body>
+</html>
